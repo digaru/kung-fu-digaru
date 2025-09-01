@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kung Fu Digaru Sénégal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #2c3e50, #4a6491);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #e0e0e0;
+        }
+        
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        #search-input {
+            width: 70%;
+            padding: 12px 20px;
+            border: 2px solid #dfe6e9;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        #search-input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 25%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            cursor: pointer;
+        }
+        
+        .clear-search {
+            position: absolute;
+            right: 22%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            cursor: pointer;
+            display: none;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .accordion-container {
+            margin-top: 30px;
+        }
+        
+        .accordion {
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+            color: white;
+            cursor: pointer;
+            padding: 25px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: 0.4s;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .accordion:after {
+            content: '\002B';
+            font-size: 1.5rem;
+            font-weight: bold;
+            float: right;
+        }
+        
+        .active:after {
+            content: "\2212";
+        }
+        
+        .accordion:hover {
+            background: linear-gradient(90deg, #2980b9, #1a252f);
+            transform: translateY(-2px);
+        }
+        
+        .panel {
+            padding: 0 25px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            margin-bottom: 20px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel-content {
+            padding: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .panel-content h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .panel-content p {
+            margin-bottom: 20px;
+        }
+        
+        .panel-content ul {
+            margin-bottom: 20px;
+            padding-left: 40px;
+        }
+        
+        .panel-content li {
+            margin-bottom: 10px;
+        }
+        
+        .not-found-message {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.2rem;
+            color: #e74c3c;
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-top: 5px solid #3498db;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        .belt-colors {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .belt-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .belt-color {
+            width: 30px;
+            height: 100px;
+            margin-right: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .belt-info {
+            flex: 1;
+        }
+        
+        .number-list {
+            columns: 3;
+            column-gap: 20px;
+        }
+        
+        .number-list li {
+            break-inside: avoid;
+            margin-bottom: 10px;
+            padding: 5px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        /* Styles pour les médias */
+        .media-container {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .media-item {
+            flex: 1 1 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .media-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .media-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .media-caption {
+            padding: 10px;
+            background: #f8f9fa;
+            font-size: 0.9rem;
+        }
+        
+        /* Styles pour l'administration */
+        .admin-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+        
+        .admin-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+        }
+        
+        .admin-btn:hover {
+            background: #c0392b;
+        }
+        
+        .admin-controls {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 250px;
+        }
+        
+        .admin-controls.show {
+            display: block;
+        }
+        
+        .admin-controls button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .admin-controls button:hover {
+            background: #2980b9;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        /* Édition des sections */
+        .edit-section-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .edit-section {
+            border-left: 3px solid #3498db;
+            padding-left: 10px;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 992px) {
+            .number-list {
+                columns: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .search-container {
+                padding: 0 10px;
+            }
+            
+            #search-input {
+                width: 90%;
+            }
+            
+            .search-icon {
+                right: 8%;
+            }
+            
+            .clear-search {
+                right: 5%;
+            }
+            
+            .accordion {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+            
+            .panel-content {
+                padding: 20px;
+                font-size: 1rem;
+            }
+            
+            .panel-content ul {
+                padding-left: 20px;
+            }
+            
+            .belt-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .belt-color {
+                width: 100%;
+                height: 30px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .number-list {
+                columns: 1;
+            }
+            
+            .admin-panel {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .admin-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .admin-controls {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #search-input {
+                width: 100%;
+            }
+            
+            .search-icon, .clear-search {
+                position: relative;
+                margin-top: 10px;
+                right: auto;
+                transform: none;
+            }
+            
+            .admin-controls {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>LA FONDATION SENEGALAISE DE KUNG FU DIGARU</h1>
+            <p class="subtitle">Découvrez l'art martial pour la nouvelle génération</p>
+        </header>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Rechercher par titre (ex: Introduction, ceintures, serment...)">
+            <div class="search-icon"><i class="fas fa-search"></i></div>
+            <div class="clear-search" id="clear-search"><i class="fas fa-times-circle"></i></div>
+        </div>
+        
+        <div class="content">
+            <div class="not-found-message" id="not-found-message">
+                <i class="fas fa-search"></i> Aucune section ne correspond à votre recherche.
+            </div>
+            
+            <div class="accordion-container" id="accordion-container">
+                <!-- Le contenu existant reste inchangé -->
+                <button class="accordion">Introduction à l'art du Kung Fu digaru</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>L'origine du Kung Fu Digaru</h3>
+                        <p>Ce programme a été créé en 2020 par un instructeur d'arts martiaux après des recherches approfondies sur le Shaolin Kung Fu et d'autres arts tels que le Karaté et le Taekwondo. L'idée est d'avoir un programme adapté à la nouvelle génération sénégalaise afin qu'elle n'ait pas besoin d'autres arts pour se défendre.</p>
+                        <p>Bien que le Kung Fu Shaolin ait des actions et des mouvements qui sont exécutés par ses instructeurs et ses pratiquants pour honorer et glorifier leurs idoles et qui n'ont rien à voir avec la pratique du combat, je les ai supprimés et j'ai changé les modèles traditionnels par des modèles que j'ai choisis moi-même après avoir résumé et augmenté certains mouvements cognitifs avec des efforts et des efforts, et je l'ai appelé (Kung Fu Digaru). Bien que certaines bases soient toujours présentes.</p>
+                        <p>Le Kung Fu Digaru est un art martial d'origine Shaolin Kung Fu. Il a été créé dans le but de nettoyer, de résumer et de faciliter, c'est-à-dire pour éliminer ce qui ne correspond pas à notre religion islamique, résumer les bases, introduire de nouvelles techniques et créer trente-deux modèles. Il a pris trente-deux formes différentes jusqu'à ce qu'il devienne adapté à la nouvelle génération et soit alors appelé Kung Fu Digaru.</p>
+                        <p>L'art du Kung Fu Digaru est né au Sénégal, dans la région de Kaffrine, par un enseignant, formateur et chercheur en arts martiaux: Alioune Diba, né à Kaffrine. Après avoir étudié le Saint Coran et l'arabe, il est aujourd'hui enseignant à l'école publique et instructeur de Shaolin Kung Fu et de Digaru Kung Fu, qu'il a lui-même inventé.</p>
+    
+                        <h3>Avantages de l'entraînement au Kung Fu Digaru</h3>
+                        <ul>
+                            <li>Stimuler le cerveau dans une large mesure.</li>
+                            <li>Renforcer et développer l'intelligence, en sachant différentes choses, en connaissant les faiblesses de l'adversaire et en se retournant contre lui, et en connaissant le moment approprié dans le temps le plus court possible pour répondre à l'adversaire et l'attaquer.</li>
+                            <li>Entraîner la patience, pousser à l'adhésion à la sagesse, ainsi que l'humilité et la capacité à contrôler les émotions.</li>
+                            <li>Renforcer la structure physique et améliorer la condition physique.</li>
+                            <li>Développer la capacité à se défendre et à défendre d'autres personnes en cas de danger et d'attaque.</li>
+                            <li>Stimuler la circulation sanguine, perdre du poids et maintenir un body sain et mobile.</li>
+                        </ul>
+                        
+                        <h3>Noms des positions (SBANS)</h3>
+                        <ul>
+                            <li>BAARS SBAN</li>
+                            <li>TIM BAARS SBAN</li>
+                            <li>TAAW SBAN</li>
+                            <li>TAMS SBAN</li>
+                            <li>WUJI SBAN</li>
+                            <li>BAWI SBAN</li>
+                            <li>FUFI SBAN</li>
+                            <li>TIM TAAW SBAN</li>
+                            <li>HAAYSU SBAN</li>
+                            <li>RANSU SBAN</li>
+                            <li>JÉYSU SBAN</li>
+                        </ul>
+                        
+                        <h3>Noms des coups de main (FAŇKU)</h3>
+                        <ul>
+                            <li>CIJU FAŇKU</li> 
+                            <li>FUROO FAŇKU</li> 
+                            <li>NGU DЁNG</li> 
+                            <li>SUPE FAŇKU</li>
+                            <li>WUTA FAŇKU</li> 
+                            <li>TÒMAR FAŇKU</li> 
+                            <li>TEKO FAŇKU</li> 
+                            <li>RЁŇAA FAŇKU</li> 
+                            <li>TUXЁЁ FAŇKU</li>
+                        </ul>
+                        
+                        <h3>Noms des coups de paume (CЁЁMA)</h3>
+                        <ul>
+                            <li>CIJU CЁЁMA</li> 
+                            <li>HAAYSU CЁЁMA</li> 
+                            <li>WUUTAA CЁЁMA</li> 
+                            <li>RЁŇAA CЁЁMA</li> 
+                            <li>DIIŇOO CЁЁMA</li> 
+                            <li>TUXЁЁ CЁЁMA</li> 
+                            <li>MUJAA CЁЁMA</li>
+                        </ul>
+                        
+                        <h3>Noms des blocs avec des mains (TЁЁFEN)</h3>
+                        <ul>
+                            <li>FUSU TЁЁFEN</li> 
+                            <li>GUDIN TЁЁFEN</li> 
+                            <li>WUKA TЁЁFEN</li>
+                            <li>LANBAAY FUSU TЁЁFEN</li> 
+                            <li>JANBAAY FUSU TЁЁFEN</li> 
+                            <li>LANBAAY GUDIN TЁЁFEN</li> 
+                            <li>JANBAAY GUDIN TЁЁFEN</li>
+                        </ul>
+                        
+                        <h3>Les noms des coups de jambe (LAYKS)</h3>
+                        <ul>
+                            <li>LAYK DANSU</li> 
+                            <li>LAYK JANBAAY</li> 
+                            <li>LAYK LANBAAY</li>
+                            <li>LAYK DÉYSU</li>
+                            <li>LAYK LÉYSU</li> 
+                            <li>LAYK RANSU</li>
+                            <li>LAYK JÉYSU</li> 
+                            <li>LAYK KANSU</li> 
+                            <li>LAYK DITAA DÉYSU</li> 
+                            <li>LAYK DIJAA DÉYSU</li> 
+                            <li>LAYK DITAA JANBAAY</li>
+                            <li>LAYK DIJAA LANBAAY</li>
+                            <li>WIN LAYK LANBAAY</li> 
+                            <li>LAYK SUDANSU</li> 
+                            <li>LAYK UDAN SU</li> 
+                            <li>LAYK LANFAAW</li> 
+                            <li>LAYK DIW FAW</li> 
+                            <li>WIN LAYK JANFAW</li> 
+                            <li>WIN LAYK JÉY FAW</li> 
+                            <li>WIN LAYK KAN FAW</li> 
+                            <li>LAYK BAAY FAN</li> 
+                            <li>LAYK SAAW FAAN</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <button class="accordion">Les ceintures en kung fu Digaru</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>Les ceintures</h3>
+                        <p>Les ceintures en Digaru sont un symbole de rang et de stade d'apprentissage. Elles représentent le stade atteint par un élève ou un attaquant et les éléments sur lesquels il se concentre pour progresser dans son apprentissage du kung-fu Digaru. Chaque bousculade a un test ; il s'agit essentiellement d'un score entre chaque bousculade, qui certifie que le testeur est prêt ou presque prêt à passer à la ceinture suivante. Il est nécessaire d'avoir un test avant de passer à la ceinture suivante.</p>
+                        
+                        <div class="belt-colors">
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #ffffff; border: 1px solid #ccc;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture blanche</h3>
+                                    <p>C'est la première ceinture qu'un combattant reçoit dans le sport du Kung Fu Digaru. La ceinture blanche symbolise le fait que l'élève est comme une ardoise vierge sur laquelle la connaissance est ajoutée.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #ffff00;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture jaune</h3>
+                                    <p>C'est la deuxième ceinture de la pratique après trois mois d'entraînement supplémentaires. La couleur jaune symbolise la lumière du soleil le matin, qui est le début de l'étape pour un élève de Digaru.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #ffa500;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture orange</h3>
+                                    <p>C'est la troisième ceinture de la pratique. Cette couleur symbolise l'énergie et l'enthousiasme. À ce stade, les connaissances de l'élève en matière d'arts martiaux augmentent.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #008000;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture verte</h3>
+                                    <p>C'est la quatrième ceinture de la pratique. Cette couleur symbolise la vie naturelle. Lorsqu'un élève a atteint ce stade, il a atteint la maturité mentale et physique requise.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #0000ff;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture bleue</h3>
+                                    <p>C'est la cinquième ceinture dans la pratique. Cette couleur symbolise le calme, la force et la compréhension. Au cours de cette étape, l'élève est capable de maîtriser l'équilibre du corps et de l'esprit.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #ff0000;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture rouge</h3>
+                                    <p>Ce sont les sixièmes ceintures en pratique. Elles symbolisent le sérieux et la responsabilité. L'élève a les compétences et la maturité pour comprendre la valeur des efforts investis.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #8B4513;"></div>
+                                <div class="belt-info">
+                                    <h3>Ceinture marron</h3>
+                                    <p>Ce sont les septièmes ceintures en pratique. Elles symbolisent le sérieux et la responsabilité. L'élève a les compétences et la maturité pour comprendre la valeur des efforts investis.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="belt-item">
+                                <div class="belt-color" style="background-color: #000000; color: white; display: flex; align-items: center; justify-content: center;">Dan</div>
+                                <div class="belt-info">
+                                    <h3>Ceinture noire</h3>
+                                    <p>C'est la huitième ceinture en pratique. Cette couleur symbolise l'autorité, le mystère, l'énergie, le courage et la confiance. Lorsqu'un élève atteint ce stade, il a acquis une connaissance suffisante de toutes les techniques.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="accordion">Les compétences attendues pour les examens de ceinture en Kung fu digaru</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>Les compétences attendues pour les examens de ceinture en Kung fu digaru</h3>
+                        <p>Le Kung fu digaru commence avec la ceinture blanche et se termine avec la ceinture noire.</p>
+                        
+                        <h3>Les compétences attendues pour les ceintures</h3>
+                        <ul>
+                            <li><strong>Ceinture blanche</strong> : L'examen porte sur les fondamentaux de la condition physique, tels que la discipline et la concentration, ainsi que sur les techniques de base de la position debout, des coups de poing et des coups de pied, avec l'exécution d'une série de saus ( aan mbaar wuniwaa et caaw mbaar wuniwa).</li>
+                            <li><strong>Ceinture jaune</strong> : L'examen porte sur les bases de la ceinture blanche, ainsi que sur de nouvelles techniques, telles que les fondamentaux et deux combinaisons (Lan Garu et En Garu).</li>
+                            <li><strong>Ceinture orange</strong> : Elle se concentre sur le renforcement des compétences acquises dans les ceintures précédentes, ainsi que sur de nouvelles techniques, telles que les bases et deux combinaisons ( Gan Garu et Bu Garu).</li>
+                            <li><strong>Ceinture verde</strong> : Elle se concentre sur le renforcement des techniques précédentes, ainsi que sur de nouvelles compétences, telles que les bases et deux combinaisons ( Ge Garu et Ren Garu).</li>
+                            <li><strong>Ceinture bleue</strong> : L'accent est mis sur le renforcement des techniques et des combinaisons des ceintures précédentes, ainsi que sur de nouvelles compétences, telles que les techniques et les combinaisons ( SST Garu et Khelbi Garu).</li>
+                        </ul>
+                        <p>Et ainsi de suite jusqu'à la fin des ceintures. Le testeur recevra un certificat prouvant qu'il a réussi un test pour passer d'un grade à l'autre. Il doit également rédiger une contribution avec sa licence et la remettre au comité pour qu'il la signe et l'imprime.</p>
+                    </div>
+                </div>
+                
+                <button class="accordion">La licence sportive</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>La licence sportive</h3>
+                        <p>Une licence sportive permet à une personne de participer aux activités organisées par la fédération ou l'association sportive du club, y compris les compétitions municipales, internationales ou mondiales. Elle permet également de participer au fonctionnement de la fédération.</p>
+                        <p>La licence est délivrée par l'intermédiaire de la fédération sportive ; elle peut également être délivrée par le club au nom de la fédération, de sorte que le club doit être affilié à la fédération. Pour la fédération, il peut y avoir une licence de compétition qui autorise le compétiteur à participer aux compétitions de la fédération. Ainsi qu'une licence d'entraîneur et d'arbitre.</p>
+                    </div>  
+                </div> 
+                
+                <button class="accordion">Le serment du kung fu digaru</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>Le serment</h3>
+                        <ul>
+                            <li><i class="fas fa-fist-raised"></i> Je m'engage que je ferai de la recherche de la maîtrise le but ultime de ma vie.</li>
+                            <li><i class="fas fa-brain"></i> Je Je m'engage que j'entrainerai mon esprit à ne pas être agressif</li>
+                            <li><i class="fas fa-handshake"></i> Je m'engage de ne pas être critiquer d'autres arts martiaux ou méthodes différentes de celles que je pratique.</li>
+                            <li><i class="fas fa-peace"></i> Je Je m'engage que je commencerai et je finirai en douceur.</li>
+                            <li><i class="fas fa-hands-helping"></i>Je m'engage que je serai humble.</li>
+                            <li><i class="fas fa-balance-scale"></i>Je m'engage que je contrôlerai mon humeur.</li>
+                            <li><i class="fas fa-book-reader"></i> Je m'engage que j'apprendrai la persévérance et le désir de comprendre.</li>
+                            <li><i class="fas fa-user-check"></i>Je m'engage que je serai d'abord strict et honnête avec moi-même.</li>
+                            <li><i class="fas fa-mountain"></i> Je m'engage que je me souviendrai qu'il y a toujours une montagne plus haute que celle sur laquelle je me tiens.</li>
+                            <li><i class="fas fa-heart"></i>Que je serai, où que je sois, mon corps et mon âme gardés et sacrés pour l'art du kung fu digaru.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <button class="accordion">Quelques mots de vocabulaire utilisés dans l'art de kung fu digaru</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>Les mots de vocabulaire</h3>
+                        <ul>
+                            <li><strong>XЁWUTAA</strong> : Ce mot est utilisé pour demander à une personne de se tenir debout, les pieds joints, les hands sur les cuisses, le corps tourné vers l'avant.</li>
+                            <li><strong>TIIWAL</strong> : Ce mot est utilisé pour demander à une personne de se tourner d'un côté à l'autre.</li>
+                            <li><strong>DEWALSII</strong> : Ce mot est utilisé pour demander à quelqu'un de récupérer.</li>
+                            <li><strong>GUUWAA</strong> : Ce mot est utilisé pour demander à quelqu'un de se préparer lorsqu'on enseigne à des groupes ou des bases séquentielles.</li>
+                            <li><strong>LUUPAA</strong> : Ce mot est utilisé pour demander une pause après une séance d'entraînement.</li>
+                            <li><strong>WUUGAN</strong> : Ce mot est utilisé pour demander de revenir en arrière.</li>
+                            <li><strong>ANKAA</strong> : Ce mot est utilisé pour demander d'avancer.</li>
+                            <li><strong>GITOO</strong> : Ce mot est utilisé pour demander à quelqu'un de s'asseoir pour recevoir des nouvelles ou des conseils.</li>
+                            <li><strong>GUUHESBAN</strong> : Ce mot est utilisé pour demander à quelqu'un de se préparer à un combat ou de s'entraîner aux coups de pied et de main.</li>
+                            <li><strong>YÉNWU</strong> : Ce mot est utilisé pour demander à quelqu'un de dire bonjour le matin ou le soir.</li>
+                            <li><strong>JAMCAAW</strong> : Ce mot est utilisé pour dire bonjour à un maître ou à un collègue.</li>
+                            <li><strong>YUUTAA JAMCAAW</strong> : Ce mot est utilisé pour dire bonjour à un maître ou à un collègue.</li>
+                            <li><strong>NÉYJAA</strong> : Ce mot est utilisé pour demander d'arrêter de se battre ou de s'entraîner.</li>
+                            <li><strong>JILOYDA</strong> : Ce mot est utilisé pour demander de se rassembler en une ou plusieurs rangées.</li>
+                            <li><strong>NGAMKAA</strong> : Ce mot est utilisé comme nom pour une personne qui a maîtrisé l'ensemble de l'art (mouvements, formes, contextes et bénéfices), et qui a passé la ceinture du Dan5 au Dan6.</li>
+                            <li><strong>REŇXAA</strong> : Ce mot est utilisé comme nom pour une personne qui has maîtrisé une grande partie de cet art et qui a dépassé la ceinture de dan2 à dan4.</li>
+                            <li><strong>LIMDAA</strong> : Ce mot est utilisé comme nom pour une personne qui a passé la ceinture rouge jusqu'au dan1.</li>
+                            <li><strong>MUAWGAA</strong> : Ce mot est utilisé pour désigner un débutant ou un pratiquant qui n'a pas atteint la ceinture rouge.</li>
+                            <li><strong>TEYAA</strong> : Un arbitre qui juge entre les compétiteurs.</li>
+                            <li><strong>TELIYAA</strong> : Celui qui est assis à l'extérieur du ring pour enregistrer les résultats entre les compétiteurs.</li>
+                            <li><strong>TENFEYAA</strong> : Ce mot est utilisé pour désigner l'établissement ou la formation.</li>
+                            <li><strong>DEBOYYAA</strong> : Ce mot est utilisé pour signifier le rassemblement.</li>
+                            <li><strong>BOMONIYA</strong> : Ce mot est utilisé pour désigner une union complète entre des groupes ou des fondations.</li>
+                            <li><strong>TAYAAM</strong> : Ce mot désigne un lieu utilisé pour l'entraînement ou les réunions.</li>
+                            <li><strong>SAAW YENWUU</strong> : Nous utilisons ce mot pour désigner la salutation au début de la forme (saaws).</li>
+                            <li><strong>SAAW GUWAA</strong> : Nous utilisons ce mot pour indiquer la préparation et le début des mouvements (saawfu) ou des formes (saaws).</li>
+                            <li><strong>PISOO</strong> : Nous utilisons ce word pour désigner un changement de jambe ou de hand.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <button class="accordion">Comment compter de 1 à 100 en kung fu Digaru</button>
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3>Les nombres en Kung Fu Digaru</h3>
+                        <ul class="number-list">
+                            <li><strong>1</strong> - aan</li>
+                            <li><strong>2</strong> - caaw</li>
+                            <li><strong>3</strong> - néys</li>
+                            <li><strong>4</strong> - diw</li>
+                            <li><strong>5</strong> - fiida</li>
+                            <li><strong>6</strong> - béysi</li>
+                            <li><strong>7</strong> - bindow</li>
+                            <li><strong>8</strong> - séyna</li>
+                            <li><strong>9</strong> - raabi</li>
+                            <li><strong>10</strong> - baaw</li>
+                            <li><strong>11</strong> - baaw aan</li>
+                            <li><strong>12</strong> - baaw caaw</li>
+                            <li><strong>13</strong> - baaw néys</li>
+                            <li><strong>14</strong> - baaw diw</li>
+                            <li><strong>15</strong> - baaw fiida</li>
+                            <li><strong>16</strong> - baaw béysi</li>
+                            <li><strong>17</strong> - baaw bindow</li>
+                            <li><strong>18</strong> - baaw séyna</li>
+                            <li><strong>19</strong> - baaw raabi</li>
+                            <li><strong>20</strong> - caaw baaw</li>
+                            <li><strong>21</strong> - caaw baaw aan</li>
+                            <li><strong>30</strong> - néys baaw</li>
+                            <li><strong>31</strong> - néys baaw aan</li>
+                            <li><strong>40</strong> - diw baaw</li>
+                            <li><strong>41</strong> - diw baaw aan</li>
+                            <li><strong>50</strong> - fiida baaw</li>
+                            <li><strong>51</strong> - fiida baaw aan</li>
+                            <li><strong>60</strong> - béysi baaw</li>
+                            <li><strong>61</strong> - béysi baaw aan</li>
+                            <li><strong>70</strong> - bindow baaw</li>
+                            <li><strong>71</strong> - bindow baaw aan</li>
+                            <li><strong>80</strong> - séyna baaw</li>
+                            <li><strong>81</strong> - séyna baaw aan</li>
+                            <li><strong>90</strong> - raabi baaw</li>
+                            <li><strong>91</strong> - raabi baaw aan</li>
+                            <li><strong>100</strong> - méerti</li>
+                            <li><strong>101</strong> - méerti aan</li>
+                            <li><strong>1,000</strong> - néyju</li>
+                            <li><strong>1,001</strong> - néyju aan</li>
+                            <li><strong>1,000,000</strong> - yongmi</li>
+                            <li><strong>1,000,001</strong> - yongmi aan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Fondation Sénégalaise de Kung Fu Digaru - Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <!-- Panneau d'administration -->
+    <div class="admin-panel">
+        <button class="admin-btn" id="admin-btn">
+            <i class="fas fa-cog"></i> Admin
+        </button>
+        <div class="admin-controls" id="admin-controls">
+            <button id="add-section-btn">Ajouter une section</button>
+            <button id="add-media-btn">Ajouter média</button>
+            <button id="edit-content-btn">Modifier contenu</button>
+            <button id="toggle-edit-mode">Mode édition</button>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter une section -->
+    <div class="modal" id="add-section-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter une nouvelle section</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="section-title">Titre de la section</label>
+                <input type="text" id="section-title" placeholder="Entrez le titre">
+            </div>
+            <div class="form-group">
+                <label for="section-content">Contenu</label>
+                <textarea id="section-content" placeholder="Entrez le contenu de la section (HTML autorisé)"></textarea>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary" id="cancel-section">Annuler</button>
+                <button class="btn btn-primary" id="save-section">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter un média -->
+    <div class="modal" id="add-media-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter un média</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="media-type">Type de média</label>
+                <select id="media-type">
+                    <option value="image">Image</option>
+                    <option value="video">Vidéo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="media-url">URL du média</label>
+                <input type="text" id="media-url" placeholder="Entrez l'URL du média">
+            </div>
+            <div class="form-group">
+                <label for="media-caption">Légende</label>
+                <input type="text" id="media-caption" placeholder="Entrez une légende (optionnel)">
+            </div>
+            <div class="form-group">
+                <label for="media-section">Section associée</label>
+                <select id="media-section">
+                    <option value="intro">Introduction</option>
+                    <option value="ceintures">Ceintures</option>
+                    <option value="examens">Examens</option>
+                    <option value="licence">Licence</option>
+                    <option value="serment">Serment</option>
+                    <option value="vocabulaire">Vocabulaire</option>
+                    <option value="nombres">Nombres</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary" id="cancel-media">Annuler</button>
+                <button class="btn btn-primary" id="save-media">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="back-to-top"><i class="fas fa-arrow-up"></i></div>
+
+    <script>
+        // Fonction de recherche améliorée
+        function searchSections() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const accordions = document.querySelectorAll('.accordion');
+            const notFoundMessage = document.getElementById('not-found-message');
+            const clearSearch = document.getElementById('clear-search');
+            let foundCount = 0;
+            
+            if (searchTerm.length > 0) {
+                clearSearch.style.display = 'block';
+            } else {
+                clearSearch.style.display = 'none';
+            }
+            
+            accordions.forEach(accordion => {
+                const title = accordion.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const panel = accordion.nextElementSibling;
+                const content = panel.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    accordion.style.display = 'flex';
+                    panel.style.display = 'block';
+                    foundCount++;
+                    
+                    // Ouvrir la section trouvée
+                    accordion.classList.add('active');
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } else {
+                    accordion.style.display = 'none';
+                    panel.style.display = 'none';
+                }
+            });
+            
+            // Afficher le message si aucun résultat n'est trouvé
+            if (foundCount === 0 && searchTerm.length > 0) {
+                notFoundMessage.style.display = 'block';
+            } else {
+                notFoundMessage.style.display = 'none';
+            }
+        }
+        
+        // Accordion functionality
+        const acc = document.getElementsByClassName("accordion");
+        
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                // Fermer tous les autres panneaux
+                for (let j = 0; j < acc.length; j++) {
+                    if (acc[j] !== this) {
+                        acc[j].classList.remove("active");
+                        acc[j].nextElementSibling.style.maxHeight = null;
+                    }
+                }
+                
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+        
+        // Écouteur d'événement pour la recherche
+        document.getElementById('search-input').addEventListener('input', searchSections);
+        
+        // Effacer la recherche
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('search-input').value = '';
+            searchSections();
+            
+            // Réinitialiser l'affichage des sections
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                accordion.style.display = 'flex';
+                const panel = accordion.nextElementSibling;
+                panel.style.display = 'block';
+                
+                // Fermer tous les panneaux sauf le premier
+                if (accordion !== accordions[0]) {
+                    accordion.classList.remove("active");
+                    panel.style.maxHeight = null;
+                } else {
+                    accordion.classList.add("active");
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        });
+        
+        // Bouton back to top
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Ouvrir la première section par défaut
+        window.addEventListener('load', () => {
+            document.querySelector('.accordion').click();
+        });
+        
+        // Fonctionnalités d'administration
+        const adminBtn = document.getElementById('admin-btn');
+        const adminControls = document.getElementById('admin-controls');
+        const addSectionModal = document.getElementById('add-section-modal');
+        const addMediaModal = document.getElementById('add-media-modal');
+        const toggleEditModeBtn = document.getElementById('toggle-edit-mode');
+        let editMode = false;
+        
+        // Afficher/masquer les contrôles admin
+        adminBtn.addEventListener('click', () => {
+            adminControls.classList.toggle('show');
+        });
+        
+        // Ouvrir le modal d'ajout de section
+        document.getElementById('add-section-btn').addEventListener('click', () => {
+            addSectionModal.classList.add('show');
+            adminControls.classList.remove('show');
+        });
+        
+        // Ouvrir le modal d'ajout de média
+        document.getElementById('add-media-btn').addEventListener('click', () => {
+            addMediaModal.classList.add('show');
+            adminControls.classList.remove('show');
+        });
+        
+        // Fermer les modals
+        document.querySelectorAll('.close-modal, .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', () => {
+                addSectionModal.classList.remove('show');
+                addMediaModal.classList.remove('show');
+            });
+        });
+        
+        // Sauvegarder une nouvelle section
+        document.getElementById('save-section').addEventListener('click', () => {
+            const title = document.getElementById('section-title').value;
+            const content = document.getElementById('section-content').value;
+            
+            if (title && content) {
+                // Créer un nouvel accordéon et panel
+                const accordionContainer = document.getElementById('accordion-container');
+                
+                const newAccordion = document.createElement('button');
+                newAccordion.className = 'accordion';
+                newAccordion.textContent = title;
+                
+                const newPanel = document.createElement('div');
+                newPanel.className = 'panel';
+                
+                const panelContent = document.createElement('div');
+                panelContent.className = 'panel-content';
+                panelContent.innerHTML = content;
+                
+                newPanel.appendChild(panelContent);
+                
+                // Ajouter au conteneur
+                accordionContainer.appendChild(newAccordion);
+                accordionContainer.appendChild(newPanel);
+                
+                // Ajouter l'écouteur d'événement pour le nouvel accordéon
+                newAccordion.addEventListener('click', function() {
+                    // Fermer tous les autres panneaux
+                    const allAccordions = document.querySelectorAll('.accordion');
+                    for (let j = 0; j < allAccordions.length; j++) {
+                        if (allAccordions[j] !== this) {
+                            allAccordions[j].classList.remove("active");
+                            allAccordions[j].nextElementSibling.style.maxHeight = null;
+                        }
+                    }
+                    
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+                
+                // Sauvegarder dans le localStorage
+                saveToLocalStorage('sections', {title, content});
+                
+                // Fermer le modal et réinitialiser les champs
+                addSectionModal.classList.remove('show');
+                document.getElementById('section-title').value = '';
+                document.getElementById('section-content').value = '';
+                
+                alert('Section ajoutée avec succès!');
+            } else {
+                alert('Veuillez remplir tous les champs');
+            }
+        });
+        
+        // Sauvegarder un nouveau média
+        document.getElementById('save-media').addEventListener('click', () => {
+            const type = document.getElementById('media-type').value;
+            const url = document.getElementById('media-url').value;
+            const caption = document.getElementById('media-caption').value;
+            const section = document.getElementById('media-section').value;
+            
+            if (url) {
+                // Créer l'élément média
+                const mediaContainer = document.createElement('div');
+                mediaContainer.className = 'media-container';
+                
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                
+                if (type === 'image') {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = caption || 'Image Kung Fu Digaru';
+                    mediaItem.appendChild(img);
+                } else {
+                    const video = document.createElement('video');
+                    video.src = url;
+                    video.controls = true;
+                    mediaItem.appendChild(video);
+                }
+                
+                if (caption) {
+                    const captionEl = document.createElement('div');
+                    captionEl.className = 'media-caption';
+                    captionEl.textContent = caption;
+                    mediaItem.appendChild(captionEl);
+                }
+                
+                mediaContainer.appendChild(mediaItem);
+                
+                // Trouver la section cible et ajouter le média
+                const sections = document.querySelectorAll('.panel-content');
+                let targetSection;
+                
+                switch(section) {
+                    case 'intro':
+                        targetSection = sections[0];
+                        break;
+                    case 'ceintures':
+                        targetSection = sections[1];
+                        break;
+                    case 'examens':
+                        targetSection = sections[2];
+                        break;
+                    case 'licence':
+                        targetSection = sections[3];
+                        break;
+                    case 'serment':
+                        targetSection = sections[4];
+                        break;
+                    case 'vocabulaire':
+                        targetSection = sections[5];
+                        break;
+                    case 'nombres':
+                        targetSection = sections[6];
+                        break;
+                }
+                
+                if (targetSection) {
+                    targetSection.appendChild(mediaContainer);
+                    
+                    // Sauvegarder dans le localStorage
+                    saveToLocalStorage('media', {type, url, caption, section});
+                    
+                    // Fermer le modal et réinitialiser les champs
+                    addMediaModal.classList.remove('show');
+                    document.getElementById('media-url').value = '';
+                    document.getElementById('media-caption').value = '';
+                    
+                    alert('Média ajouté avec succès!');
+                }
+            } else {
+                alert('Veuillez entrer une URL');
+            }
+        });
+        
+        // Basculer le mode édition
+        toggleEditModeBtn.addEventListener('click', () => {
+            editMode = !editMode;
+            
+            if (editMode) {
+                toggleEditModeBtn.textContent = 'Désactiver mode édition';
+                // Ajouter des boutons d'édition à chaque section
+                addEditButtons();
+            } else {
+                toggleEditModeBtn.textContent = 'Mode édition';
+                // Supprimer les boutons d'édition
+                removeEditButtons();
+            }
+            
+            adminControls.classList.remove('show');
+        });
+        
+        // Fonction pour ajouter des boutons d'édition
+        function addEditButtons() {
+            const panelContents = document.querySelectorAll('.panel-content');
+            
+            panelContents.forEach(content => {
+                // Vérifier si un bouton d'édition existe déjà
+                if (!content.querySelector('.edit-section-btn')) {
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'edit-section-btn';
+                    editBtn.innerHTML = '<i class="fas fa-edit"></i> Modifier';
+                    editBtn.addEventListener('click', () => {
+                        editSection(content);
+                    });
+                    content.appendChild(editBtn);
+                }
+            });
+        }
+        
+        // Fonction pour supprimer les boutons d'édition
+        function removeEditButtons() {
+            const editButtons = document.querySelectorAll('.edit-section-btn');
+            editButtons.forEach(btn => btn.remove());
+        }
+        
+        // Fonction pour éditer une section
+        function editSection(contentElement) {
+            const originalContent = contentElement.innerHTML;
+            
+            // Créer une interface d'édition
+            const editInterface = document.createElement('div');
+            editInterface.className = 'edit-section';
+            editInterface.innerHTML = `
+                <textarea style="width: 100%; min-height: 200px;">${contentElement.innerHTML.replace(/<button class="edit-section-btn">.*?<\/button>/g, '')}</textarea>
+                <div>
+                    <button class="btn btn-primary save-edit">Enregistrer</button>
+                    <button class="btn btn-secondary cancel-edit">Annuler</button>
+                </div>
+            `;
+            
+            contentElement.innerHTML = '';
+            contentElement.appendChild(editInterface);
+            
+            // Écouteurs pour les boutons
+            contentElement.querySelector('.save-edit').addEventListener('click', () => {
+                const newContent = contentElement.querySelector('textarea').value;
+                contentElement.innerHTML = newContent;
+                
+                // Remettre le bouton d'édition
+                const editBtn = document.createElement('button');
+                editBtn.className = 'edit-section-btn';
+                editBtn.innerHTML = '<i class="fas fa-edit"></i> Modifier';
+                editBtn.addEventListener('click', () => {
+                    editSection(contentElement);
+                });
+                contentElement.appendChild(editBtn);
+                
+                // Sauvegarder dans le localStorage
+                // Note: Dans une vraie application, il faudrait identifier la section
+                alert('Modifications enregistrées!');
+            });
+            
+            contentElement.querySelector('.cancel-edit').addEventListener('click', () => {
+                contentElement.innerHTML = originalContent;
+                
+                // Remettre le bouton d'édition
+                const editBtn = document.createElement('button');
+                editBtn.className = 'edit-section-btn';
+                editBtn.innerHTML = '<i class="fas fa-edit"></i> Modifier';
+                editBtn.addEventListener('click', () => {
+                    editSection(contentElement);
+                });
+                contentElement.appendChild(editBtn);
+            });
+        }
+        
+        // Fonction pour sauvegarder dans le localStorage
+        function saveToLocalStorage(key, data) {
+            let existingData = JSON.parse(localStorage.getItem(key)) || [];
+            existingData.push(data);
+            localStorage.setItem(key, JSON.stringify(existingData));
+        }
+        
+        // Charger les données sauvegardées au chargement de la page
+        window.addEventListener('load', () => {
+            // Charger les sections sauvegardées
+            const savedSections = JSON.parse(localStorage.getItem('sections')) || [];
+            
+            savedSections.forEach(section => {
+                const accordionContainer = document.getElementById('accordion-container');
+                
+                const newAccordion = document.createElement('button');
+                newAccordion.className = 'accordion';
+                newAccordion.textContent = section.title;
+                
+                const newPanel = document.createElement('div');
+                newPanel.className = 'panel';
+                
+                const panelContent = document.createElement('div');
+                panelContent.className = 'panel-content';
+                panelContent.innerHTML = section.content;
+                
+                newPanel.appendChild(panelContent);
+                
+                accordionContainer.appendChild(newAccordion);
+                accordionContainer.appendChild(newPanel);
+                
+                // Ajouter l'écouteur d'événement
+                newAccordion.addEventListener('click', function() {
+                    const allAccordions = document.querySelectorAll('.accordion');
+                    for (let j = 0; j < allAccordions.length; j++) {
+                        if (allAccordions[j] !== this) {
+                            allAccordions[j].classList.remove("active");
+                            allAccordions[j].nextElementSibling.style.maxHeight = null;
+                        }
+                    }
+                    
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            });
+            
+            // Charger les médias sauvegardés
+            const savedMedia = JSON.parse(localStorage.getItem('media')) || [];
+            
+            savedMedia.forEach(media => {
+                const mediaContainer = document.createElement('div');
+                mediaContainer.className = 'media-container';
+                
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                
+                if (media.type === 'image') {
+                    const img = document.createElement('img');
+                    img.src = media.url;
+                    img.alt = media.caption || 'Image Kung Fu Digaru';
+                    mediaItem.appendChild(img);
+                } else {
+                    const video = document.createElement('video');
+                    video.src = media.url;
+                    video.controls = true;
+                    mediaItem.appendChild(video);
+                }
+                
+                if (media.caption) {
+                    const captionEl = document.createElement('div');
+                    captionEl.className = 'media-caption';
+                    captionEl.textContent = media.caption;
+                    mediaItem.appendChild(captionEl);
+                }
+                
+                mediaContainer.appendChild(mediaItem);
+                
+                // Trouver la section cible
+                const sections = document.querySelectorAll('.panel-content');
+                let targetSection;
+                
+                switch(media.section) {
+                    case 'intro':
+                        targetSection = sections[0];
+                        break;
+                    case 'ceintures':
+                        targetSection = sections[1];
+                        break;
+                    case 'examens':
+                        targetSection = sections[2];
+                        break;
+                    case 'licence':
+                        targetSection = sections[3];
+                        break;
+                    case 'serment':
+                        targetSection = sections[4];
+                        break;
+                    case 'vocabulaire':
+                        targetSection = sections[5];
+                        break;
+                    case 'nombres':
+                        targetSection = sections[6];
+                        break;
+                }
+                
+                if (targetSection) {
+                    targetSection.appendChild(mediaContainer);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
